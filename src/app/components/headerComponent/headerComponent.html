@@ -1,0 +1,101 @@
+<nav class="navbar navbar-cust">
+    <div class="container content">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>                       
+				</button>
+            <img src="img/icon.png" class="navbar-image">
+            <a class="navbar-brand align-middle header-text">Recyclr</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav" routerLinkActive="active">
+                <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+                    </div>
+                </div>
+                <a (click)='onClick("postad")' class="btn btn-primary"><i class="glyphicon glyphicon glyphicon-plus"></i> Post AD</a>
+                <button class="btn btn-primary" type="button" data-target="#logModal" data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i> Login</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- Modal -->
+<div class="modal fade" id="logModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" checked>Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-block-half btn-left"><span class="glyphicon glyphicon-off"></span> Login</button>
+                    <button type="button" id="signup" class="btn btn-success btn-block-half btn-right" data-dismiss="modal" data-target="#signModal"
+                        data-toggle="modal"><span class="glyphicon glyphicon-pencil" ></span>Signup</button>
+                    <br><br>
+                    <p class="text-center">Forgot <a href="#">Password?</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="signModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="glyphicon glyphicon-lock"></span>Signup</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span> Name</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-primary" for="psw"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+                        <input type="email" class="form-control" id="psw" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Confirm Password</label>
+                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                    </div>
+                    <button type="button" id="signup" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil" ></span> Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

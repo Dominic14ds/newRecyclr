@@ -1,0 +1,115 @@
+<div class="container">
+    <h3>Post an Ad</h3>
+    <p class="text-primary">Select a Category</p>
+    <div class="row">
+        <div class="column col-md-2 category">
+            <img src="img/phone1.png" class="img-responsive img-cat">
+            <p class="text-center">Mobiles</p>
+        </div>
+        <div class="column col-md-2 category">
+            <img src="img/car.png" class="img-responsive img-cat">
+            <p class="text-center">Cars & Bikes</p>
+        </div>
+        <div class="column col-md-2 category">
+            <img src="img/computer.png" class="img-responsive img-cat">
+            <p class="text-center">Laptop & PC</p>
+        </div>
+        <div class="column col-md-2 category">
+            <img src="img/furniture.png" class="img-responsive img-cat">
+            <p class="text-center">Furnitures</p>
+        </div>
+        <div class="column col-md-2 category">
+            <img src="img/appliance.png" class="img-responsive img-cat">
+            <p class="text-center">Appliances</p>
+        </div>
+        <div class="column col-md-2 category">
+            <img src="img/home.png" class="img-responsive img-cat">
+            <p class="text-center">Real estate</p>
+        </div>
+    </div>
+    <hr>
+    <div class="col-md-6 border-rt">
+
+
+        <p class="text-primary text-center">Mobiles</p>
+
+        <div class="col-md-10 ">
+            <br><br>
+            <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm.value)" novalidate>
+                <div class="form-group row">
+                    <label class="control-label col-sm-3">Title</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="title" #titleRef #titleModelRef="ngModel" class="form-control" required minlength="6" ngModel>
+                        <div *ngIf="titleModelRef.errors && titleModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!titleModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!titleModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-3">Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" #nameRef #nameModelRef="ngModel" class="form-control" required minlength="6" ngModel>
+                        <div *ngIf="nameModelRef.errors && nameModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!nameModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!nameModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-3">Category</label>
+                    <div class="col-sm-9">
+                        <select name="category" class="form-control" #categoryRef #categoryModelRef="ngModel" required ngModel>
+                        <option *ngFor="let option of options" [value]="option.value">
+                            {{option.name}}
+                        </option>
+                        </select>
+                        <div *ngIf="categoryModelRef.errors && categoryModelRef.touched" class="alert alert-danger">
+                            Please select a category.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-sm-3">Description</label>
+                    <div class="col-sm-9">
+                        <textarea type="text" name="description" class="form-control" #descriptionRef #desriptionModelRef="ngModel" required minlength="6"
+                            ngModel></textarea>
+                        <div *ngIf="desriptionModelRef.errors && desriptionModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!desriptionModelRef.errors.required">Please enter description.</div>
+                            <div [hidden]="!desriptionModelRef.errors.minlength">Please enter a valid description. </div>
+                        </div>
+                    </div>
+                </div>
+                <button [disabled]="!productForm.form.valid" type="submit" class="btn btn-primary">Post AD</button>
+            </form>
+        </div>
+    </div>
+    <p class="text-primary text-center">Details</p>
+    <div class="col-md-6">
+
+        <div class="col-md-10">
+            <br><br>
+            <form class="form-horizontal" action="/action_page.php">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Name:</label>
+                    <div class="col-sm-9">
+                        <input type="input" class="form-control" id="title" name="title">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Phone Number:</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" id="title" name="title" maxlength="10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Email Id:</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="title" name="title">
+                    </div>
+                </div>
+            </form>
+            <button type="button" class="btn btn-primary pull-right">Post Ad</button>
+        </div>
+    </div>
+</div>

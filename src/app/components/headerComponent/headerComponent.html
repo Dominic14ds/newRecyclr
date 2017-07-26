@@ -6,7 +6,7 @@
 					<span class="icon-bar"></span>                       
 				</button>
             <img src="img/icon.png" class="navbar-image">
-            <a class="navbar-brand align-middle header-text">Recyclr</a>
+            <a routerLink="/" class="navbar-brand align-middle header-text">Recyclr</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav" routerLinkActive="active">
@@ -23,13 +23,14 @@
                     </div>
                 </div>
                 <a (click)='onClick("postad")' class="btn btn-primary"><i class="glyphicon glyphicon glyphicon-plus"></i> Post AD</a>
-                <button class="btn btn-primary" type="button" data-target="#logModal" data-toggle="modal"><i class="glyphicon glyphicon-log-in"></i> Login</button>
+                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#logModal" ><i class="glyphicon glyphicon-log-in"></i> Login</button>
+                <button class="btn btn-primary" type="button" (click)="onLogout()"><i class="glyphicon glyphicon-log-in"></i>Sign Out</button>
             </form>
         </div>
     </div>
 </nav>
 <!-- Modal -->
-<div class="modal fade" id="logModal" role="dialog">
+<div id="logModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -39,19 +40,26 @@
                 <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
             </div>
             <div class="modal-body" style="padding:40px 50px;">
-                <form role="form">
+                <form #loginForm="ngForm"  novalidate>
                     <div class="form-group">
                         <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <input type="text" name="userName" #userNameRef #userNameModelRef="ngModel" class="form-control" required minlength="5" ngModel placeholder="Enter email">
+                        <div *ngIf="userNameModelRef.errors && userNameModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!userNameModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!userNameModelRef.errors.minlength"> Name length should be minimum 5 characters </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                        <input type="password" name="password" #passwordRef #passwordModelRef="ngModel" class="form-control" required ngModel  placeholder="Enter password">
+                        <div *ngIf="passwordModelRef.errors && passwordModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!passwordModelRef.errors.required">Please enter your password</div>
+                        </div>
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox" value="" checked>Remember me</label>
                     </div>
-                    <button type="submit" class="btn btn-block-half btn-left"><span class="glyphicon glyphicon-off"></span> Login</button>
+                    <button type="button" [disabled]="!loginForm.form.valid" (click)='onLogin(loginForm.value)' data-dismiss="modal" class="btn btn-block-half btn-left"><span class="glyphicon glyphicon-off"></span> Login</button>
                     <button type="button" id="signup" class="btn btn-success btn-block-half btn-right" data-dismiss="modal" data-target="#signModal"
                         data-toggle="modal"><span class="glyphicon glyphicon-pencil" ></span>Signup</button>
                     <br><br>
@@ -72,28 +80,56 @@
                 <h4><span class="glyphicon glyphicon-lock"></span>Signup</h4>
             </div>
             <div class="modal-body" style="padding:40px 50px;">
-                <form role="form">
+                <form #registerForm="ngForm" novalidate>
                     <div class="form-group">
-                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span> Name</label>
-                        <input type="text" class="form-control" id="usrname" placeholder="Enter Name">
+                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span>First Name</label>
+                        <input type="text" name="firstName" #firstNameRef #firstNameModelRef="ngModel" class="form-control" required minlength="6" ngModel>
+                        <div *ngIf="firstNameModelRef.errors && firstNameModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!firstNameModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!firstNameModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                        <input type="text" class="form-control" id="usrname" placeholder="Enter email">
+                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span>Last Name</label>
+                        <input type="text" name="lastName" #lastNameRef #lastNameModelRef="ngModel" class="form-control" required minlength="6" ngModel>
+                        <div *ngIf="lastNameModelRef.errors && lastNameModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!lastNameModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!lastNameModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="text-primary" for="usrname"><span class="glyphicon glyphicon-user"></span>User Name</label>
+                        <input type="text" name="userName" #userNameRef #userNameModelRef="ngModel" class="form-control" required minlength="5" ngModel>
+                        <div *ngIf="userNameModelRef.errors && userNameModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!userNameModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!userNameModelRef.errors.minlength"> Name length should be minimum 5 characters </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="text-primary" for="psw"><span class="glyphicon glyphicon-envelope"></span> Email</label>
-                        <input type="email" class="form-control" id="psw" placeholder="Enter password">
+                        <input type="email" name="email" #emailRef #emailModelRef="ngModel" class="form-control" required minlength="6" ngModel>
+                        <div *ngIf="emailModelRef.errors && emailModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!emailModelRef.errors.required">Please enter your name</div>
+                            <div [hidden]="!emailModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                        <input type="password" name="password" #upasswordRef #upasswordModelRef="ngModel" class="form-control" required minlength="5" ngModel>
+                        <div *ngIf="upasswordModelRef.errors && upasswordModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!upasswordModelRef.errors.required">Please enter your password</div>
+                            <div [hidden]="!upasswordModelRef.errors.minlength"> Name length should be minimum 5 characters </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Confirm Password</label>
-                        <input type="text" class="form-control" id="psw" placeholder="Enter password">
+                        <label class="text-primary" for="psw"><span class="glyphicon glyphicon-eye-open"></span> Phone</label>
+                        <input type="text" name="phone" #phoneRef #phoneModelRef="ngModel" class="form-control" required minlength="5" ngModel>
+                        <div *ngIf="phoneModelRef.errors && phoneModelRef.touched" class="alert alert-danger">
+                            <div [hidden]="!phoneModelRef.errors.required">Please enter your password</div>
+                            <div [hidden]="!phoneModelRef.errors.minlength"> Name length should be minimum 5 characters </div>
+                        </div>
                     </div>
-                    <button type="button" id="signup" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil" ></span> Signup</button>
+                    <button type="button" [disabled]="!registerForm.form.valid" (click)='onSignup(registerForm.value)' class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil" ></span> Signup</button>
                 </form>
             </div>
         </div>

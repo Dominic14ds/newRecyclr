@@ -1,0 +1,52 @@
+<div class="container">
+<div class="col-md-10 ">
+    <br><br>
+    <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm.value)" novalidate>
+        <div class="form-group row">
+            <label class="control-label col-sm-3">Title</label>
+            <div class="col-sm-9">
+                <input type="text" name="title" #titleRef #titleModelRef="ngModel" class="form-control" required minlength="6" [(ngModel)]="advertisement.title">
+                <div *ngIf="titleModelRef.errors && titleModelRef.touched" class="alert alert-danger">
+                    <div [hidden]="!titleModelRef.errors.required">Please enter your name</div>
+                    <div [hidden]="!titleModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-3">Name</label>
+            <div class="col-sm-9">
+                <input type="text" name="name" #nameRef #nameModelRef="ngModel" class="form-control" required minlength="6" [(ngModel)]="advertisement.name">
+                <div *ngIf="nameModelRef.errors && nameModelRef.touched" class="alert alert-danger">
+                    <div [hidden]="!nameModelRef.errors.required">Please enter your name</div>
+                    <div [hidden]="!nameModelRef.errors.minlength"> Name length should be minimum 6 characters </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-3">Category</label>
+            <div class="col-sm-9">
+                <select name="category" class="form-control" #categoryRef #categoryModelRef="ngModel" required [(ngModel)]="advertisement.category">
+                        <option *ngFor="let option of options" [value]="option.name">
+                            {{option.name}}
+                        </option>
+                        </select>
+                <div *ngIf="categoryModelRef.errors && categoryModelRef.touched" class="alert alert-danger">
+                    Please select a category.
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-3">Description</label>
+            <div class="col-sm-9">
+                <textarea type="text" name="description" class="form-control" #descriptionRef #desriptionModelRef="ngModel" required minlength="6"
+                    [(ngModel)]="advertisement.description"></textarea>
+                <div *ngIf="desriptionModelRef.errors && desriptionModelRef.touched" class="alert alert-danger">
+                    <div [hidden]="!desriptionModelRef.errors.required">Please enter description.</div>
+                    <div [hidden]="!desriptionModelRef.errors.minlength">Please enter a valid description. </div>
+                </div>
+            </div>
+        </div>
+        <button [disabled]="!productForm.form.valid" type="submit" class="btn btn-primary">Post AD</button>
+    </form>
+</div>
+</div>
